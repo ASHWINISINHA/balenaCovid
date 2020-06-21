@@ -8,7 +8,10 @@
 """
 
 import smbus
+from flask import Flask
+app = Flask(__name__)
 
+@app.route('/')
 INT_STATUS   = 0x00  # Which interrupts are tripped
 INT_ENABLE   = 0x01  # Which interrupts are active
 FIFO_WR_PTR  = 0x02  # Where data is being written
@@ -197,3 +200,7 @@ class MAX30100(object):
             "REV_ID": self.i2c.read_byte_data(I2C_ADDRESS, REV_ID),
             "PART_ID": self.i2c.read_byte_data(I2C_ADDRESS, PART_ID),
         }
+      def hello_world():
+        return 'Hello World!'
+      if __name__ == '__main__':
+        app.run(host='0.0.0.0', port=80)
