@@ -8,6 +8,8 @@
 """
 
 import smbus
+from flask import Flask
+app = Flask(__name__)
 
 INT_STATUS   = 0x00  # Which interrupts are tripped
 INT_ENABLE   = 0x01  # Which interrupts are active
@@ -197,3 +199,25 @@ class MAX30100(object):
             "REV_ID": self.i2c.read_byte_data(I2C_ADDRESS, REV_ID),
             "PART_ID": self.i2c.read_byte_data(I2C_ADDRESS, PART_ID),
         }
+      @app.route('/')
+      def hello_world():
+        return 'Hello World!'
+        return {
+            "INT_STATUS": self.i2c.read_byte_data(I2C_ADDRESS, INT_STATUS),
+            "INT_ENABLE": self.i2c.read_byte_data(I2C_ADDRESS, INT_ENABLE),
+            "FIFO_WR_PTR": self.i2c.read_byte_data(I2C_ADDRESS, FIFO_WR_PTR),
+            "OVRFLOW_CTR": self.i2c.read_byte_data(I2C_ADDRESS, OVRFLOW_CTR),
+            "FIFO_RD_PTR": self.i2c.read_byte_data(I2C_ADDRESS, FIFO_RD_PTR),
+            "FIFO_DATA": self.i2c.read_byte_data(I2C_ADDRESS, FIFO_DATA),
+            "MODE_CONFIG": self.i2c.read_byte_data(I2C_ADDRESS, MODE_CONFIG),
+            "SPO2_CONFIG": self.i2c.read_byte_data(I2C_ADDRESS, SPO2_CONFIG),
+            "LED_CONFIG": self.i2c.read_byte_data(I2C_ADDRESS, LED_CONFIG),
+            "TEMP_INTG": self.i2c.read_byte_data(I2C_ADDRESS, TEMP_INTG),
+            "TEMP_FRAC": self.i2c.read_byte_data(I2C_ADDRESS, TEMP_FRAC),
+            "REV_ID": self.i2c.read_byte_data(I2C_ADDRESS, REV_ID),
+            "PART_ID": self.i2c.read_byte_data(I2C_ADDRESS, PART_ID),
+        }
+        
+        
+      if __name__ == '__main__':
+        app.run(host='0.0.0.0', port=80)
